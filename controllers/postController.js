@@ -1,6 +1,7 @@
 // 이 컨트롤러는 게시물 작성 요청 들어오면 실행된다.
 
 // 모델 가져오기 !
+const { request } = require('express');
 const postModel = require('../models/postmodel');
 
 // 게시물 작성
@@ -43,15 +44,57 @@ async function createPost(req, res) {
 }
 
 // 게시물 리스트 조회
+// async function getPosts(req, res) {
+//     try {
+//         const posts = await postModel.getPosts();
+//         res.status(200).json(posts);
+//     } catch (err) {
+//         console.error('게시글 읽는 중 오류 발생:', err.message);
+//         res.status(500).json({ message: '서버 오류 발생', error: err.message });
+//     }
+// }
+
+// 페이징 적용 게시물 리스트 조회
 async function getPosts(req, res) {
+    // console.log('req.query:',req.query);
+    const { offset, limit } = req.query;
+
     try {
-        const posts = await postModel.getPosts();
-        res.status(200).json(posts);
+        // offset, limit 없을 시 에러
+        if (!offset || !limit) {
+            return res.status(400).json({
+                message: 'offset, limit 값이 유효하지 않음',
+            })
+        }
+        // offset, limit 정수 처리, requestData 객체 생성
+        const requestData = {
+            limit: parseInt(limit,10),
+            offset: parseInt(offset,10),
+        };
+        // console.log('requestData : ', requestData);
+        const responseData = await postModel.getPosts(requestData);
+
+        // 가져온 데이터 없을시 에러
+        if (!responseData || !requestData === 0 ){
+            return res.status(404).json({
+                message: '게시물이 존재하지 않습니다',
+            })
+        }
+        
+        // 데이터 성공적으로 가져왔을 시, 200, 데이터 전송
+        return res.status(200).json({
+            message: '게시물 조회 성공',
+            data: responseData,
+        });
     } catch (err) {
-        console.error('게시글 읽는 중 오류 발생:', err.message);
-        res.status(500).json({ message: '서버 오류 발생', error: err.message });
+        console.error('게시물 조회 중 오류 발생', err.message);
+        return res.status(500).json({
+            message: '서버 오류발생',
+            error: err.message,
+        });
     }
-}
+};
+
 
 // post_id 통한 게시물 상세조회
 async function getPostById(req, res) {

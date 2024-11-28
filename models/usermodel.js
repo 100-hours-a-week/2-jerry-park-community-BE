@@ -25,6 +25,7 @@ async function createUser({nickname,email,password,profile_imgPath}) {
     }
 }
 
+// 로그인시 사용
 async function findUserByEmail(email) {
     const sql = `SELECT * FROM users WHERE email = ?`;
 

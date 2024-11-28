@@ -34,14 +34,15 @@ async function registerUser(req, res) {
     }
 }
 
+// 로그인시
 async function loginUser(req,res){
     const {email, password}= req.body;
-    console.log(req.body); // 요청 본문을 로그로 출력하여 확인
+    // console.log('로그인시 req.body:', req.body); // 요청 본문을 로그로 출력하여 확인
 
     try { 
         // 이메일로 사용자 검색
         const user = await usermodel.findUserByEmail(email);
-        
+        // console.log('db에서 가져온 사용자 정보 : ', user);
         // 사용자 없으면 로그인 실패
         if (!user) {
             return res.status(400).json({message: '이메일 또는 비밀번호가 일치하지 않습니다.'});
@@ -59,12 +60,20 @@ async function loginUser(req,res){
             return res.status(400).json({message:'이메일 또는 비밀번호가 일치하지 않습니다.'});
         }
         
+        // 성공 시 세션에 사용자 정보 저장
+        req.session.user = {
+            user_id: user.user_id,
+            nickname: user.nickname,
+            email: user.email,
+        };
+        console.log('로그인 할 때 세션에서 생성 데이터 :',req.session.user); // 로그인 후 세션 확인
 
         res.status(200).json({
             message : '로그인 성공',
             user_id: user.user_id, //사용자 id 반환
             nickname: user.nickname, //사용자의 닉네임 반환
         });
+
     } catch(err) {
         console.error('로그인 오류', err); // 서버 콘솔에 오류 출력
         res.status(500).json({
@@ -76,6 +85,7 @@ async function loginUser(req,res){
 
 async function getUser(req,res) {
     const{user_id} = req.params;
+    
     try {
         const user = await usermodel.getUserById(user_id);
         if(!user) {
@@ -93,9 +103,18 @@ async function updateUserNickname(req,res) {
     // console.log(req.params);
     const {user_id} = req.params;
     const {nickname} = req.body;
+    console.log('닉넴 업데이트 함수 user_id', user_id);
+    console.log('닉넴 업데이트 함수 nickname:',nickname);
 
-    // console.log('user_id', user_id);
-    // console.log('nickname:',nickname);
+
+    console.log('닉넴변경 put 요청시 req.session.user :',req.session.user);
+    // // 세션에서 로그인 한 사용자 정보 가져오기
+    // const loggedInUser = req.session.user;
+    // // 세션에서 로그인한 사용자가 있는지 확인
+    // if (!loggedInUser) {
+    //     return res.status(401).json({ message: '로그인하지 않았습니다.' }); // 로그인되지 않은 경우
+    // }
+
     if (!nickname) {
         return res.status(400).json({message: '닉네임이 필요합니다'});
     }

@@ -6,6 +6,9 @@ const userController = require('../controllers/userController');
 const multer = require('multer');
 const path = require('path');
 
+// 쿠키/세션 인가 사용
+const { isAuthenticated } = require('../middleware/authMiddleware');
+
 // 파일 저장 위치, 파일 이름 설정 (멀터)
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {

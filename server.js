@@ -10,23 +10,43 @@ const app = express();
 const port = 3000;
 const cors = require('cors');
 const path = require('path');   // 이미지 정적 경로? 
+const session = require('express-session'); // 쿠키 세션
+const cookieParser = require('cookie-parser');
+
+app.use(cookieParser());
+// 쿠키 세션 설정
+app.use(session({
+    secret: 'jerryKey',  // 세션 암호화 키
+    resave: false,       // 매 요청마다 세션 저장
+    saveUninitialized: true, // 초기화되지 않은 세션 저장 옵션
+    cookie: {
+        httpOnly: false,
+    }  
+}));
+
+// 모든 출처에서 오는 요청을 허용
+app.use(cors({
+    origin: 'http://127.0.0.1:5500', // 클라이언트 도메인 명시
+    credentials: true // 인증 정보를 포함하도록 설정
+})); 
 
 // uploads 폴더를 (이미지) 정적 파일로 제공하도록 설정
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
-// 모든 출처에서 오는 요청을 허용
-app.use(cors()); 
 // JSON 바디 파싱 미들웨어
 app.use(express.json());
 // 폼데이터 파싱할 수 있는 설정
 app.use(express.urlencoded({extended:true}));
 // 요청 타임아웃 설정 (5초)
-app.use(timeout('20s'));
+// app.use(timeout('20s'));
 // 타임아웃 에러 핸들링 미들웨어
 app.use((req, res, next) => {
-    if (req.timedout) {
-        return res.status(503).json({ message: 'Request timed out!' });
-    }
+    // if (req.timedout) {
+    //     return res.status(503).json({ message: 'Request timed out!' });
+    // }    
+    // console.log('Request Cookies:', req.cookies);
+    // console.log('Request Session:', req.session); // 쿠키세션 로그 확인
+
     next();
 });
 // 요청 제한 미들웨어 설정 (1분에 100번 요청만 허용)

@@ -33,7 +33,7 @@ async function createPost({title, content, user_id, image}) {
 }
 
 // 게시글 가져오기 sql문
-async function getPosts() {
+async function getPosts({offset, limit}) {
     // posts 테이블에서 내림차순 쿼리문
 
     // user_id 통해 users에서 nickname 가져오기
@@ -42,10 +42,11 @@ async function getPosts() {
         FROM posts
         INNER JOIN users ON posts.user_id = users.user_id
         ORDER BY posts.created_time DESC
+        LIMIT ? OFFSET ?
     `;
 
     try {
-        const [rows] = await jerrydb.execute(sql);
+        const [rows] = await jerrydb.execute(sql,[limit, offset]);
         return rows;
     } catch (err) {
         console.error('게시글 조회 중 에러 발생 ', err.message);
@@ -73,6 +74,8 @@ async function getPostById(post_id){
         throw err;
     }
 }
+// 게시물 총 갯수
+
 
 // 게시물 수정
 async function updatePost(post_id, {title, content}) {
