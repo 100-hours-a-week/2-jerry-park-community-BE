@@ -68,6 +68,7 @@ async function loginUser(req,res){
         };
         console.log('로그인 할 때 세션에서 생성 데이터 :',req.session.user); // 로그인 후 세션 확인
 
+
         res.status(200).json({
             message : '로그인 성공',
             user_id: user.user_id, //사용자 id 반환
@@ -108,12 +109,12 @@ async function updateUserNickname(req,res) {
 
 
     console.log('닉넴변경 put 요청시 req.session.user :',req.session.user);
-    // // 세션에서 로그인 한 사용자 정보 가져오기
-    // const loggedInUser = req.session.user;
-    // // 세션에서 로그인한 사용자가 있는지 확인
-    // if (!loggedInUser) {
-    //     return res.status(401).json({ message: '로그인하지 않았습니다.' }); // 로그인되지 않은 경우
-    // }
+    // 세션에서 로그인 한 사용자 정보 가져오기
+    const loggedInUser = req.session.user;
+    // 세션에서 로그인한 사용자가 있는지 확인
+    if (!loggedInUser) {
+        return res.status(401).json({ message: '로그인하지 않았습니다.' }); // 로그인되지 않은 경우
+    }
 
     if (!nickname) {
         return res.status(400).json({message: '닉네임이 필요합니다'});

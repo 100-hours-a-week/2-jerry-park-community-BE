@@ -21,14 +21,20 @@ app.use(session({
     saveUninitialized: true, // 초기화되지 않은 세션 저장 옵션
     cookie: {
         httpOnly: false,
+        secure: false,
     }  
 }));
 
 // 모든 출처에서 오는 요청을 허용
 app.use(cors({
-    origin: 'http://127.0.0.1:5500', // 클라이언트 도메인 명시
-    credentials: true // 인증 정보를 포함하도록 설정
+    origin: 'http://localhost:5500', // 클라이언트 도메인 명시
+    credentials: true, // 인증 정보를 포함하도록 설정
 })); 
+
+app.get('/set-session', (req, res) => {
+    req.session.key = 'value'; // 세션에 저장
+    res.send('세션에 값 저장 완료');
+});
 
 // uploads 폴더를 (이미지) 정적 파일로 제공하도록 설정
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
@@ -72,5 +78,5 @@ app.use('/api/posts/comments',commentRoutes);
 
 // 서버 시작
 app.listen(port, () => {
-    console.log(`서버 시작 : http://localhost:${port}`);
+    console.log(`BE 서버 시작 : http://localhost:${port}`);
 });
