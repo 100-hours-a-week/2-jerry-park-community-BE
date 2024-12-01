@@ -12,6 +12,8 @@ const cors = require('cors');
 const path = require('path');   // 이미지 정적 경로? 
 const session = require('express-session'); // 쿠키 세션
 const cookieParser = require('cookie-parser');
+const colors = require('colors');  // colors 패키지 불러오기
+const moment = require('moment');  // moment 패키지 불러오기
 
 app.use(cookieParser());
 // 쿠키 세션 설정
@@ -78,5 +80,6 @@ app.use('/api/posts/comments',commentRoutes);
 
 // 서버 시작
 app.listen(port, () => {
-    console.log(`BE 서버 시작 : http://localhost:${port}`);
+    console.log(`BE 서버 시작 : http://localhost:${port}`.green);
 });
+console.log(`서버가 시작된 시간: ${moment().format('YYYY-MM-DD HH:mm:ss')}`.blue);
