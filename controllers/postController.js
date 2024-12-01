@@ -5,7 +5,7 @@ import { request } from 'express';
 import  postModel  from '../models/postmodel.js'; // import로 변경
 
 // 게시물 작성
-async function createPost(req, res) {
+const createPost = async (req, res) => {
     // req.body는 클라가 보낸 데이터 본문 가져오는 객체
     const {title, content, user_id} = req.body;
     
@@ -55,7 +55,7 @@ async function createPost(req, res) {
 // }
 
 // 페이징 적용 게시물 리스트 조회
-async function getPosts(req, res) {
+const getPosts = async (req, res) => {
     // console.log('req.query:',req.query);
     const { offset, limit } = req.query;
 
@@ -97,7 +97,7 @@ async function getPosts(req, res) {
 
 
 // post_id 통한 게시물 상세조회
-async function getPostById(req, res) {
+const getPostById = async (req, res) => {
     const post_id = req.query.post_id; // 요청 url에서 id 가져옴
 
     
@@ -121,7 +121,7 @@ async function getPostById(req, res) {
     }
 } 
 
-async function updatePost(req, res) {
+const updatePost = async (req, res) => {
     const post_id = req.query.post_id;
     const {title, content} = req.body;
 
@@ -138,7 +138,7 @@ async function updatePost(req, res) {
     }
 }
 
-async function deletePost(req,res) {
+const deletePost = async (req,res) => {
     const {post_id} = req.query; // URL post_id 쿼리 가져옴
 
     if (!post_id) {
@@ -160,7 +160,7 @@ async function deletePost(req,res) {
 }
 
 // 좋아요 증가
-async function likePost(req,res) {
+const likePost = async (req,res) => {
     const {post_id}= req.query;
 
     if (!post_id){

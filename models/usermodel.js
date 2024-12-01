@@ -4,7 +4,7 @@ import jerrydb from '../DBpools/jerryDBpool.js';
 
 // 유저 생성하는 createUser (쿼리문 삽입)
 // !!!!!!!!!!!!!유저 프로필 이미지 아직 없음
-async function createUser({nickname,email,password,profile_imgPath}) {
+const createUser = async ({nickname,email,password,profile_imgPath}) => {
     // profile_imgPath = profile_imgPath || null;
     const sql = `
         INSERT INTO users (nickname,email,password,profile_img)
@@ -24,8 +24,7 @@ async function createUser({nickname,email,password,profile_imgPath}) {
         throw err;
     }
 }
-
-async function findUserByEmail(email) {
+const findUserByEmail = async (email) => {
     const sql = `SELECT * FROM users WHERE email = ?`;
 
     try {
@@ -46,7 +45,7 @@ async function findUserByEmail(email) {
 }
 
 // 회원정보수정페이지 유저정보 가져오기
-async function getUserById(user_id){
+const getUserById = async (user_id) => {
     const sql = `SELECT email, nickname, profile_img FROM users WHERE user_id = ?`;
     // pool 과 execute 차이
     const [rows] = await jerrydb.query(sql, [user_id]);
@@ -54,7 +53,7 @@ async function getUserById(user_id){
 }
 
 // 회원정보수정 (닉네임 변경)
-async function updateUserNickname(user_id, nickname) {
+const updateUserNickname = async (user_id, nickname) => {
     console.log('닉네임 수정 하기 user_id:', user_id, 'nickname:', nickname);  // 값 확인
     const sql = `UPDATE users SET nickname = ? WHERE user_id = ?`;
     const [result] = await jerrydb.query(sql, [nickname, user_id]);
@@ -64,7 +63,7 @@ async function updateUserNickname(user_id, nickname) {
 }
 
 // 비밀번호 변경
-async function updatePassword(user_id, hashedPassword){
+const updatePassword = async (user_id, hashedPassword) => {
     const sql = `UPDATE users SET password = ? WHERE user_id = ?`;
     const[result] = await jerrydb.execute(sql, [hashedPassword, user_id]);
     console.log('쿼리실행결과 : ',result);
@@ -72,7 +71,7 @@ async function updatePassword(user_id, hashedPassword){
 }
 
 // 사용자 탈퇴 기능
-async function deleteUser(user_id) {
+const deleteUser = async (user_id) => {
     const sql = `DELETE FROM users WHERE user_id = ?`;
     const [result] = await jerrydb.execute(sql,[user_id]);
     return result;

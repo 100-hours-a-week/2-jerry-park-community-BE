@@ -2,7 +2,7 @@
 import jerrydb  from '../DBpools/jerryDBpool.js';
 
 // 게시글 새로 작성
-async function createPost({title, content, user_id, image}) {
+const createPost = async ({title, content, user_id, image}) => {
 
     // // title, content, user_id가 undefined라면 null로 처리
     // if (title === undefined) title = null;
@@ -33,7 +33,7 @@ async function createPost({title, content, user_id, image}) {
 }
 
 // 게시글 가져오기 sql문
-async function getPosts({offset, limit}) {
+const getPosts = async ({offset, limit}) => {
     // posts 테이블에서 내림차순 쿼리문
 
     // user_id 통해 users에서 nickname 가져오기
@@ -55,7 +55,7 @@ async function getPosts({offset, limit}) {
 }
 
 // 게시물 상세 조회
-async function getPostById(post_id){
+const getPostById = async (post_id) => {
     const sql = `
         SELECT posts.*, users.nickname, users.profile_img
         FROM posts
@@ -99,7 +99,7 @@ async function updatePost(post_id, {title, content}) {
 }
 
 // 게시물 삭제
-async function deletePost(post_id) {
+const deletePost = async (post_id) => {
     const sql = `
         DELETE FROM posts WHERE post_id = ?
     `;
@@ -114,7 +114,7 @@ async function deletePost(post_id) {
 }
 
 // 좋아요 증가
-async function increseLikes(post_id) {
+const increseLikes = async (post_id) => {
     const sql = `UPDATE posts SET likes = likes+1 WHERE post_id = ? `;
     const [result] = await jerrydb.execute(sql, [post_id]);
 
@@ -129,7 +129,7 @@ async function increseLikes(post_id) {
 }
 
 // 조회수
-async function increseViews(post_id) {
+const increseViews = async (post_id) => {
     const sql = `UPDATE posts SET views = views + 1 WHERE post_id = ?`;
     const [result] = await jerrydb.execute(sql,[post_id]);
 

@@ -4,7 +4,7 @@ import usermodel from '../models/usermodel.js';
 import bcrypt from 'bcryptjs'; // bcrypt 라이브러리 가져오기 (비밀번호 해싱)
 
 // req(요청객체(닉네임,이메일,비밀번호 등)), res(응답객체)
-async function registerUser(req, res) {
+const registerUser = async (req, res) => {
     // 요청 본문에서 nickname, email, password를 추출해 변수에 할당
     const { nickname, email, password } = req.body;
     let profile_imgPath = null;
@@ -35,7 +35,7 @@ async function registerUser(req, res) {
 }
 
 // 로그인시
-async function loginUser(req,res){
+const loginUser = async (req,res) => {
     const {email, password}= req.body;
     // console.log('로그인시 req.body:', req.body); // 요청 본문을 로그로 출력하여 확인
 
@@ -84,7 +84,7 @@ async function loginUser(req,res){
     }
 }
 
-async function getUser(req,res) {
+const getUser = async (req,res) => {
     const{user_id} = req.params;
     
     try {
@@ -100,7 +100,7 @@ async function getUser(req,res) {
 }
 
 // 유저 정보(닉네임 변경)
-async function updateUserNickname(req,res) {
+const updateUserNickname = async (req,res) => {
     // console.log(req.params);
     const {user_id} = req.params;
     const {nickname} = req.body;
@@ -129,7 +129,7 @@ async function updateUserNickname(req,res) {
 }
 
 // 비밀번호 변경
-async function updateUserPassword(req, res){
+const updateUserPassword = async (req, res) => {
     const {user_id} = req.params;
     const {newPassword, confirmPassword} = req.body;
 
@@ -159,7 +159,7 @@ async function updateUserPassword(req, res){
     }
 }
 
-async function deleteUser(req,res){
+const deleteUser = async (req,res) => {
     const {user_id} = req.params;
 
     try {

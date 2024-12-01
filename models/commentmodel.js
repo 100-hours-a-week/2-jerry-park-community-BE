@@ -1,7 +1,7 @@
 import jerrydb from '../DBpools/jerryDBpool.js';
 
 // post_id 에 따라 댓글 가져오기
-async function getCommentsByPostId(post_id) {
+const getCommentsByPostId = async (post_id) => {
     const sql = `
         SELECT c.comment_id, c.content, c.created_time, c.user_id, u.nickname, u.profile_img
         FROM comments c
@@ -27,7 +27,7 @@ async function getCommentsByPostId(post_id) {
     }
 }
 
-async function createComment(post_id, content, user_id) {
+const createComment = async (post_id, content, user_id) => {
     const sql = `
         INSERT INTO comments (post_id, content, user_id)
         VALUES(?,?,?);
@@ -41,7 +41,7 @@ async function createComment(post_id, content, user_id) {
     }
 }
 
-async function updateComment(comment_id, content){
+const updateComment = async (comment_id, content) => {
     // 댓글 ID, 새로운 내용 기준으로 DB 쿼리문작성
     const sql = `
         UPDATE comments
@@ -52,7 +52,7 @@ async function updateComment(comment_id, content){
     return result;
 }
 
-async function deleteComment(comment_id){
+const deleteComment = async (comment_id) => {
     const sql = `
         DELETE FROM comments WHERE comment_id = ?
     `;

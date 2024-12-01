@@ -1,7 +1,7 @@
 import commentmodel from '../models/commentmodel.js';
 
 // 댓글 가져오는 getComments 함수
-async function getComments(req, res) {
+const getComments = async (req, res) => {
     const {post_id} = req.query;
 
     if (!post_id) {
@@ -19,7 +19,7 @@ async function getComments(req, res) {
 }
 
 
-async function createComment(req,res){
+const createComment = async(req,res) => {
     const {post_id, content, user_id} = req.body;
 
     // 요청 데이터 검증
@@ -43,7 +43,7 @@ async function createComment(req,res){
     }
 }
 
-async function updateComment(req,res) {
+const updateComment = async (req,res) => {
     // req.query는 커리문자열
     // req.params는 url경로의 변수
     const {comment_id} = req.params; // comment_id 가져오기
@@ -78,7 +78,7 @@ async function updateComment(req,res) {
     }
 }
 
-async function deleteComment(req,res) {
+const deleteComment = async (req,res) => {
     const { comment_id } = req.params;
 
     console.log('comment_id : ', comment_id);
