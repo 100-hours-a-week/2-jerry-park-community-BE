@@ -1,4 +1,4 @@
-const commentmodel = require('../models/commentmodel');
+import commentmodel from '../models/commentmodel.js';
 
 // 댓글 가져오는 getComments 함수
 async function getComments(req, res) {
@@ -98,7 +98,7 @@ async function deleteComment(req,res) {
     }
 }
 
-module.exports = {
+export default {
     getComments,
     createComment,
     updateComment,

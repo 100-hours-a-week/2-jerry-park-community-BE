@@ -11,7 +11,7 @@ function isAuthenticated(req, res, next) {
     res.status(400).json({ message: '인증, 인가받지 않았습니다. (로그인하지 않음)' });
 };
 
-module.exports = { 
+export default { 
     isAuthenticated,
 };
 

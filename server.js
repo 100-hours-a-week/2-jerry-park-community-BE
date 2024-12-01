@@ -1,22 +1,22 @@
 // server.js
-const express = require('express');
-const timeout = require('connect-timeout'); // connect-timeout 모듈
-const rateLimit = require('express-rate-limit'); // express-rate-limit 모듈
-const itemRoutes = require('./routes/itemRoutes'); // Routes 가져오기 (예전 제리가방)
-const postRoutes = require('./routes/postRoutes'); // 게시물  route 등록
-const userRoutes = require('./routes/userRoutes'); // 회원가입 route 등록
-const commentRoutes = require('./routes/commentRoutes'); // 댓글 route
+import express from 'express';
+import timeout from 'connect-timeout'; // connect-timeout 모듈
+import rateLimit from 'express-rate-limit'; // express-rate-limit 모듈
+import postRoutes from './routes/postRoutes.js'; // 게시물  route 등록
+import userRoutes from './routes/userRoutes.js'; // 회원가입 route 등록
+import commentRoutes from './routes/commentRoutes.js'; // 댓글 route
 const app = express();
 const port = 3000;
-const cors = require('cors');
-const path = require('path');   // 이미지 정적 경로? 
-const session = require('express-session'); // 쿠키 세션
-const cookieParser = require('cookie-parser');
-const colors = require('colors');  // colors 패키지 불러오기
-const moment = require('moment');  // moment 패키지 불러오기
+import cors from 'cors';
+import path from 'path';   // 이미지 정적 경로
+import session from 'express-session'; // 쿠키 세션
+import cookieParser from 'cookie-parser';
+import colors from 'colors'; // colors 패키지
+import moment from 'moment'; // moment 패키지
 
-app.use(cookieParser());
+
 // 쿠키 세션 설정
+app.use(cookieParser());
 app.use(session({
     secret: 'jerryKey',  // 세션 암호화 키
     resave: false,       // 매 요청마다 세션 저장
@@ -27,19 +27,23 @@ app.use(session({
     }  
 }));
 
-// 모든 출처에서 오는 요청을 허용
+// cors 설정
 app.use(cors({
     origin: 'http://localhost:5500', // 클라이언트 도메인 명시
     credentials: true, // 인증 정보를 포함하도록 설정
 })); 
 
-app.get('/set-session', (req, res) => {
-    req.session.key = 'value'; // 세션에 저장
-    res.send('세션에 값 저장 완료');
-});
+// app.get('/set-session', (req, res) => {
+//     req.session.key = 'value'; // 세션에 저장
+//     res.send('세션에 값 저장 완료');
+// });
 
-// uploads 폴더를 (이미지) 정적 파일로 제공하도록 설정
+// __dirname을 대신하여 import.meta.url을 사용하여 디렉토리 경로 계산 (ES6)
+// decodeURIComponent는 URL에서 인코딩된 문자열을 원래의 형태로 복원하는 함수
+const __dirname = path.dirname(decodeURIComponent(new URL(import.meta.url).pathname));
+// uploads 폴더를 정적 파일로 제공하도록 설정
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+
 
 // JSON 바디 파싱 미들웨어
 app.use(express.json());

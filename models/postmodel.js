@@ -1,5 +1,5 @@
 // jerryDBpool.js 에서 풀 가져오기
-const jerrydb = require('../DBpools/jerryDBpool');
+import jerrydb  from '../DBpools/jerryDBpool.js';
 
 // 게시글 새로 작성
 async function createPost({title, content, user_id, image}) {
@@ -142,7 +142,7 @@ async function increseViews(post_id) {
     return updatedViews[0].views;
 }
 
-module.exports = {
+export default {
     createPost,
     getPosts,
     getPostById,

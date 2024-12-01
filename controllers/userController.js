@@ -1,7 +1,7 @@
 // 이 컨트롤러는 회원가입 요청을 처리한다.
 // 모델 가져오기
-const usermodel = require('../models/usermodel');
-const bcrypt = require('bcryptjs'); // bcrypt 라이브러리 가져오기 (비밀번호 해싱)
+import usermodel from '../models/usermodel.js';
+import bcrypt from 'bcryptjs'; // bcrypt 라이브러리 가져오기 (비밀번호 해싱)
 
 // req(요청객체(닉네임,이메일,비밀번호 등)), res(응답객체)
 async function registerUser(req, res) {
@@ -176,7 +176,7 @@ async function deleteUser(req,res){
 }
 
 // userController 모듈 내보내기
-module.exports = {
+export default {
     registerUser,
     loginUser,
     getUser,

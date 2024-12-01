@@ -1,13 +1,13 @@
-const express = require('express');
+import express from 'express';
 const router = express.Router();
-const userController = require('../controllers/userController');
+import userController from '../controllers/userController.js';
 
 // 멀터 사용
-const multer = require('multer');
-const path = require('path');
+import multer from 'multer';
+import path from 'path';
 
 // 쿠키/세션 인가 사용
-const { isAuthenticated } = require('../middleware/authMiddleware');
+import isAuthenticated from '../middleware/authMiddleware.js';
 
 // 파일 저장 위치, 파일 이름 설정 (멀터)
 const storage = multer.diskStorage({
@@ -32,7 +32,7 @@ router.post('/login', userController.loginUser);
 router.get('/:user_id', userController.getUser);
 
 // user_id 통해 회원정보 닉네임 수정 put
-router.put('/:user_id', isAuthenticated, userController.updateUserNickname);
+router.put('/:user_id', userController.updateUserNickname);
 
 // user_id 통해 비밀번호 변경
 router.put('/:user_id/password', userController.updateUserPassword);
@@ -41,4 +41,4 @@ router.put('/:user_id/password', userController.updateUserPassword);
 router.delete('/:user_id', userController.deleteUser);
 
 // 라우터 내보내기
-module.exports = router;
+export default router;

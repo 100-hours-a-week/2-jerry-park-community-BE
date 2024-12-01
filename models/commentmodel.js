@@ -1,6 +1,4 @@
-// 댓글 관련 model
-
-const jerrydb = require('../DBpools/jerryDBpool');
+import jerrydb from '../DBpools/jerryDBpool.js';
 
 // post_id 에 따라 댓글 가져오기
 async function getCommentsByPostId(post_id) {
@@ -68,7 +66,7 @@ async function deleteComment(comment_id){
     }
 }
 
-module.exports = {
+export default {
     getCommentsByPostId,
     createComment,
     updateComment,

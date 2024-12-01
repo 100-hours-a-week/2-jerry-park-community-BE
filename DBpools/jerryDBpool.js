@@ -1,8 +1,9 @@
 // .env 파일에서 환경 변수 로드
-require('dotenv').config();
+import dotenv from 'dotenv';
+dotenv.config();
 
 // 'mysql2/promise의 promise 모듈 불러옴 (비동기 작업)
-const mysql = require('mysql2/promise');
+import mysql from 'mysql2/promise';
 
 // DB 연결 풀 생성
 const jerrydb = mysql.createPool({
@@ -13,4 +14,4 @@ const jerrydb = mysql.createPool({
 });
 
 // 연결 풀 외부 내보내기
-module.exports = jerrydb;
+export default jerrydb;

@@ -1,6 +1,6 @@
 // user 관련 모델임
 // db연결 풀 가져오기
-const jerrydb = require('../DBpools/jerryDBpool');
+import jerrydb from '../DBpools/jerryDBpool.js';
 
 // 유저 생성하는 createUser (쿼리문 삽입)
 // !!!!!!!!!!!!!유저 프로필 이미지 아직 없음
@@ -25,7 +25,6 @@ async function createUser({nickname,email,password,profile_imgPath}) {
     }
 }
 
-// 로그인시 사용
 async function findUserByEmail(email) {
     const sql = `SELECT * FROM users WHERE email = ?`;
 
@@ -80,7 +79,7 @@ async function deleteUser(user_id) {
 }
 
 // 모델 익스포트
-module.exports = {
+export default {
     createUser,
     findUserByEmail,
     getUserById,

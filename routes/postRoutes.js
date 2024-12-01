@@ -1,8 +1,12 @@
 // express 객체
-const express = require('express');
+import express from 'express';
 const router = express.Router();
-const postController = require('../controllers/postController');
-const multer = require('multer');
+
+// postController 모듈 import
+import * as postController from '../controllers/postController.js';
+
+// multer 모듈 import
+import multer from 'multer';
 
 // 파일 저장 위치, 파일 이름 설정 (멀터)
 const storage = multer.diskStorage({
@@ -41,5 +45,5 @@ router.put('/like',postController.likePost);
 // 게시물 조회수 증가
 router.put('/views', postController.increseViews);
 
-module.exports = router;
+export default router ;
 // 이 라우터 모듈 내보냄

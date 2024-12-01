@@ -1,8 +1,8 @@
 // 이 컨트롤러는 게시물 작성 요청 들어오면 실행된다.
 
 // 모델 가져오기 !
-const { request } = require('express');
-const postModel = require('../models/postmodel');
+import { request } from 'express';
+import  postModel  from '../models/postmodel.js'; // import로 변경
 
 // 게시물 작성
 async function createPost(req, res) {
@@ -193,7 +193,7 @@ async function increseViews(req,res) {
 }
 
 // createPost 모듈 외부로 exports
-module.exports = {
+export {
     createPost,
     getPosts,
     getPostById,
