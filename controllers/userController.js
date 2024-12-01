@@ -111,6 +111,8 @@ const updateUserNickname = async (req,res) => {
     console.log('닉넴변경 put 요청시 req.session.user :',req.session.user);
     // 세션에서 로그인 한 사용자 정보 가져오기
     const loggedInUser = req.session.user;
+    // 세션 유저 정보
+    console.log(req.session.user);
     // 세션에서 로그인한 사용자가 있는지 확인
     if (!loggedInUser) {
         return res.status(401).json({ message: '로그인하지 않았습니다.' }); // 로그인되지 않은 경우
