@@ -77,6 +77,21 @@ const deleteUser = async (user_id) => {
     return result;
 }
 
+// 닉네임으로 사용자 찾기 (닉네임 중복검사)
+const findUserByNickname = async (nickname) => {
+    const sql = `SELECT * FROM users WHERE nickname = ?`;
+
+    try {
+        const [rows] = await jerrydb.execute(sql,[nickname]);
+        // 조회된 사용자 있으면 rows.length > 0 이 됨
+        // 조회된 사용자 없으면 null 반환
+        return rows.length > 0 ? rows[0] : null;
+    } catch (err) {
+        console.error('닉네임 조회 중 에러 발생', err.message);
+        throw err;
+    }
+}
+
 // 모델 익스포트
 export default {
     createUser,
@@ -85,5 +100,6 @@ export default {
     updateUserNickname,
     updatePassword,
     deleteUser,
+    findUserByNickname,
 };
 

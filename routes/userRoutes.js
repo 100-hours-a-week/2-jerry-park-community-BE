@@ -40,5 +40,8 @@ router.put('/:user_id/password', userController.updateUserPassword);
 // user_id 통해 회원 탈퇴
 router.delete('/:user_id', userController.deleteUser);
 
+// api/users/nicknamecheck/:nickname닉네임 중복 검사 
+router.get('/nicknamecheck/:nickname',userController.checkNickname);
+
 // 라우터 내보내기
 export default router;

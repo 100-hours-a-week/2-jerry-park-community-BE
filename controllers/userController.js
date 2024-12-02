@@ -161,6 +161,7 @@ const updateUserPassword = async (req, res) => {
     }
 }
 
+// 회원탈퇴
 const deleteUser = async (req,res) => {
     const {user_id} = req.params;
 
@@ -177,6 +178,24 @@ const deleteUser = async (req,res) => {
     }
 }
 
+// 닉네임 중복 검사
+const checkNickname = async (req,res) => {
+    const { nickname } = req.params;
+
+    try {
+        // 닉네임 이미 존재하는지 확인
+        const exsistUser = await usermodel.findUserByNickname(nickname);
+
+        if (exsistUser) {
+            return res.status(400).json({message: '* 중복된 닉네임 입니다.'});
+        }
+        return res.status(200).json({message:'사용 가능한 닉네임입니다.'});
+    } catch (err) {
+        console.error('닉네임 중복 검사 오류 : ', err);
+        return res.status(500).json({message:'닉네임 중복검사 중 서버 오류'});
+    }
+}
+
 // userController 모듈 내보내기
 export default {
     registerUser,
@@ -185,4 +204,5 @@ export default {
     updateUserNickname,
     updateUserPassword,
     deleteUser,
+    checkNickname,
 };
