@@ -46,7 +46,7 @@ const getPosts = async ({offset, limit}) => {
     `;
 
     try {
-        const [rows] = await jerrydb.execute(sql,[limit, offset]);
+        const [rows] = await jerrydb.execute(sql,[offset, limit]);
         return rows;
     } catch (err) {
         console.error('게시글 조회 중 에러 발생 ', err.message);
