@@ -46,7 +46,7 @@ const getPosts = async ({offset, limit}) => {
     `;
 
     try {
-        const [rows] = await jerrydb.execute(sql,[offset, limit]);
+        const [rows] = await jerrydb.execute(sql,[offset, limit]); // leo 게시글 에러 offset, limit 자리 변경 
         return rows;
     } catch (err) {
         console.error('게시글 조회 중 에러 발생 ', err.message);
