@@ -47,11 +47,11 @@ const loginUser = async (req,res) => {
         if (!user) {
             return res.status(400).json({message: '이메일 또는 비밀번호가 일치하지 않습니다.'});
         }
-    // bcrypt 작동하는지 확인
-    console.log('입력된 비밀번호:', password);
-    console.log('해싱된 비밀번호:', user.password); 
-    console.log('입력된 비밀번호 길이:', password.length);
-    console.log('저장된 해시 비밀번호 길이:', user.password.length);
+            // bcrypt 작동하는지 확인
+            console.log('입력된 비밀번호:', password);
+            console.log('해싱된 비밀번호:', user.password); 
+            console.log('입력된 비밀번호 길이:', password.length);
+            console.log('저장된 해시 비밀번호 길이:', user.password.length);
         // bcrypt를 사용해 비밀번호 비교, 입력된 비밀번호와 해싱된 비밀번호를 비교
         const isPasswordValid = await bcrypt.compare(password,user.password);
         console.log('비밀번호 일치 여부 :', isPasswordValid);
@@ -65,6 +65,7 @@ const loginUser = async (req,res) => {
             user_id: user.user_id,
             nickname: user.nickname,
             email: user.email,
+            profile_img: user.profile_img,
         };
         console.log('로그인 할 때 세션에서 생성 데이터 :',req.session.user); // 로그인 후 세션 확인
 
