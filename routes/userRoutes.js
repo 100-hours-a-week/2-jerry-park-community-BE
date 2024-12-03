@@ -28,6 +28,9 @@ router.post('/register', upload.single('profile_img'), userController.registerUs
 // /login 경로로 들어온 post 요청 처리 (로그인 라우트)
 router.post('/login', userController.loginUser);
 
+// api/users/session으로 세션정보 내보내기
+router.get('/session', userController.getSessionUser);
+
 // user_id 통해 회원정보 수정페이지 get
 router.get('/:user_id', userController.getUser);
 
@@ -42,6 +45,8 @@ router.delete('/:user_id', userController.deleteUser);
 
 // api/users/nicknamecheck/:nickname닉네임 중복 검사 
 router.get('/nicknamecheck/:nickname',userController.checkNickname);
+
+
 
 // 라우터 내보내기
 export default router;

@@ -197,6 +197,18 @@ const checkNickname = async (req,res) => {
     }
 }
 
+// 세션 정보 내보내기
+const getSessionUser = (req, res) => {
+    console.log('getSessionUser의 req.session : ', req.session);
+    if (req.session && req.session.user) {
+        console.log('세션 유저:', req.session.user);
+        return res.status(200).json(req.session.user); // 세션에 저장된 사용자 정보 반환
+    } else {
+        console.log('세션이 비어 있습니다.');
+        return res.status(401).json({ message: "로그인되지 않았습니다." }); // 세션 정보가 없을 때
+    }
+};
+
 // userController 모듈 내보내기
 export default {
     registerUser,
@@ -206,4 +218,5 @@ export default {
     updateUserPassword,
     deleteUser,
     checkNickname,
+    getSessionUser,
 };
