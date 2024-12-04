@@ -7,7 +7,7 @@ import multer from 'multer';
 import path from 'path';
 
 // 쿠키/세션 인가 사용
-import isAuthenticated from '../middleware/authMiddleware.js';
+import {isAuthenticated} from '../middleware/authMiddleware.js';
 
 // 파일 저장 위치, 파일 이름 설정 (멀터)
 const storage = multer.diskStorage({
@@ -32,7 +32,7 @@ router.post('/login', userController.loginUser);
 router.get('/session', userController.getSessionUser);
 
 // user_id 통해 회원정보 수정페이지 get
-router.get('/:user_id', userController.getUser);
+router.get('/:user_id',isAuthenticated, userController.getUser);
 
 // user_id 통해 회원정보 닉네임 수정 put
 router.put('/:user_id', userController.updateUserNickname);
