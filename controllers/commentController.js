@@ -78,13 +78,14 @@ const updateComment = async (req,res) => {
     }
 }
 
+// 댓글 삭제
 const deleteComment = async (req,res) => {
     const { comment_id } = req.params;
 
-    console.log('comment_id : ', comment_id);
+    console.log('삭제할 comment_id : ', comment_id);
     try { 
         const result = await commentmodel.deleteComment(comment_id);
-
+        console.log('삭제 컨트롤러에서 result : ', result);
         if(result.affectedRows>0){
             res.status(200).json({success:true, message: '댓글 삭제 완료'});
         } else {

@@ -52,16 +52,18 @@ const updateComment = async (comment_id, content) => {
     return result;
 }
 
+// 댓글 삭제
 const deleteComment = async (comment_id) => {
+    console.log('모델에서 삭제할 comment_id', comment_id);
     const sql = `
         DELETE FROM comments WHERE comment_id = ?
     `;
-
     try {
-        [result] = await jerrydb.execute(sql, [comment_id]);
+        const [result] = await jerrydb.execute(sql, [comment_id]);
+        console.log('댓글 삭제 쿼리 실행 결과',result);
         return result;
     } catch (error) {
-        console.error('댓글 삭제 중 에러 발생');
+        console.error('댓글 삭제 중 에러 발생:', error.message); // 에러 메시지 출력
         throw error;
     }
 }
