@@ -20,10 +20,7 @@ const createPost = async (req, res) => {
     if (req.file) {
         imagePath = `/uploads/${req.file.filename}`; // 이미지 경로
     }
-
-
     
-
     try {
         // createPost 함수 호출, db에 게시글 저장, 게시글 id 반환
         const newPostId = await postModel.createPost({title, content, user_id, image: imagePath});
@@ -121,6 +118,7 @@ const getPostById = async (req, res) => {
     }
 } 
 
+// 게시글 수정
 const updatePost = async (req, res) => {
     const post_id = req.query.post_id;
     const {title, content} = req.body;

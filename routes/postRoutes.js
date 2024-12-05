@@ -4,7 +4,8 @@ const router = express.Router();
 
 // postController 모듈 import
 import * as postController from '../controllers/postController.js';
-
+// 쿠키/세션 인가 사용
+import isAuthenticated from '../middleware/authMiddleware.js';
 // multer 모듈 import
 import multer from 'multer';
 
@@ -23,7 +24,7 @@ const upload = multer({ storage: storage });
 
 // post에 multer 적용 (파일이 있을 경우)
 //'image'는 클라에서 보내는 파일 이름
-router.post('/', upload.single('image'), postController.createPost);
+router.post('/',isAuthenticated, upload.single('image'), postController.createPost);
 // POST 요청 들어올 시 실행되는 라우터 정의
 // postController의 createPost 함수를 호출 (POST시)
 

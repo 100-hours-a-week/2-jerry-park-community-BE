@@ -32,10 +32,10 @@ router.post('/login', userController.loginUser);
 router.get('/session', userController.getSessionUser);
 
 // user_id 통해 회원정보 수정페이지 get
-router.get('/:user_id',isAuthenticated, userController.getUser);
+router.get('/:user_id', isAuthenticated, userController.getUser);
 
 // user_id 통해 회원정보 닉네임 수정 put
-router.put('/:user_id', userController.updateUserNickname);
+router.put('/:user_id', isAuthenticated, userController.updateUserNickname);
 
 // user_id 통해 비밀번호 변경
 router.put('/:user_id/password', userController.updateUserPassword);
