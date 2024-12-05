@@ -7,7 +7,7 @@ import multer from 'multer';
 import path from 'path';
 
 // 쿠키/세션 인가 사용
-import {isAuthenticated} from '../middleware/authMiddleware.js';
+import { isAuthenticated } from '../middleware/authMiddleware.js';
 
 // 파일 저장 위치, 파일 이름 설정 (멀터)
 const storage = multer.diskStorage({

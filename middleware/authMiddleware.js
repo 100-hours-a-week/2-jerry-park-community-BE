@@ -11,7 +11,7 @@ const isAuthenticated = (req, res, next) => {
     return next(); // 다음 미들웨어로 넘어감
 };
 
-export default { 
+export { 
     isAuthenticated,
 };
 

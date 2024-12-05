@@ -5,7 +5,7 @@ const router = express.Router();
 // postController 모듈 import
 import * as postController from '../controllers/postController.js';
 // 쿠키/세션 인가 사용
-import isAuthenticated from '../middleware/authMiddleware.js';
+import { isAuthenticated } from '../middleware/authMiddleware.js';
 // multer 모듈 import
 import multer from 'multer';
 
