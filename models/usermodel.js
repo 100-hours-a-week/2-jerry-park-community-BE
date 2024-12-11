@@ -24,6 +24,7 @@ const createUser = async ({nickname,email,password,profile_imgPath}) => {
         throw err;
     }
 }
+
 const findUserByEmail = async (email) => {
     const sql = `SELECT * FROM users WHERE email = ?`;
 

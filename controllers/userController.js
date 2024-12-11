@@ -37,7 +37,7 @@ const registerUser = async (req, res) => {
 // 로그인시
 const loginUser = async (req,res) => {
     const {email, password}= req.body;
-    // console.log('로그인시 req.body:', req.body); // 요청 본문을 로그로 출력하여 확인
+    // console.log('로그인시 req.body:', req.body); // 클라에서 온 요청 출력
 
     try { 
         // 이메일로 사용자 검색
@@ -45,7 +45,7 @@ const loginUser = async (req,res) => {
         // console.log('db에서 가져온 사용자 정보 : ', user);
         // 사용자 없으면 로그인 실패
         if (!user) {
-            return res.status(400).json({message: '이메일 또는 비밀번호가 일치하지 않습니다.'});
+            return res.status(401).json({message: '이메일 또는 비밀번호가 일치하지 않습니다.'}); // 프론트 헬퍼텍스트에 입력되는 값
         }
             // bcrypt 작동하는지 확인
             console.log('입력된 비밀번호:', password);
