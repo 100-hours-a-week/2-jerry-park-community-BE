@@ -3,9 +3,7 @@
 import jerrydb from '../DBpools/jerryDBpool.js';
 
 // 유저 생성하는 createUser (쿼리문 삽입)
-// !!!!!!!!!!!!!유저 프로필 이미지 아직 없음
 const createUser = async ({nickname,email,password,profile_imgPath}) => {
-    // profile_imgPath = profile_imgPath || null;
     const sql = `
         INSERT INTO users (nickname,email,password,profile_img)
         VALUES (?,?,?,?)
@@ -17,33 +15,23 @@ const createUser = async ({nickname,email,password,profile_imgPath}) => {
 
         // 삽입 데이터의 고유 ID 반환(user_id) (AI(Auto Increment))
         return result.insertId;
-        console.log('회원가입 성공');
     } catch (err) {
         // 오류 발생시 콘솔에 에러 메세지 출력
-        console.error('회원 정보 삽입 중 오류 발생', err.message);
+        console.error('회원 정보 삽입 중 오류 발생', err.message, err.code);
+        // 유니크 키 제약 조건 오류 처리
+        // if (err.code === 'ER_DUP_ENTRY') {
+        //     if (err.message.includes('unique_email')) {
+        //         throw new Error('* 중복된 이메일 입니다.mmm');
+        //     }
+        //     if (err.message.includes('unique_nickname')) {
+        //         throw new Error('* 중복된 닉네임입니다.mmm');
+        //     }
+        // }
         throw err;
     }
 }
 
-const findUserByEmail = async (email) => {
-    const sql = `SELECT * FROM users WHERE email = ?`;
 
-    try {
-        // execute는 ? 자리에 email값 대체하는 메서드
-        const[rows] = await jerrydb.execute(sql,[email]);
-
-        // rows.length 값 출력 (사용자 정보가 있으면 1 이상, 없으면 0)
-        console.log('조회된 사용자 수:', rows.length);
-        
-        // 사용자 존재시 첫 번째 사용자 정보가 rows[0]에 저장, 사용자 없으면 null 값
-        return rows.length > 0 ? rows[0] : null;
-        
-
-    } catch (err) {
-        console.error('이메일 사용자 조회 중 오류 발생',err.message);
-        throw err;
-    }
-}
 
 // 회원정보수정페이지 유저정보 가져오기
 const getUserById = async (user_id) => {
@@ -90,6 +78,27 @@ const findUserByNickname = async (nickname) => {
     } catch (err) {
         console.error('닉네임 조회 중 에러 발생', err.message);
         throw err;
+    }
+}
+
+// 로그인 시 사용, 회원가입 중복검사 시 사용
+const findUserByEmail = async (email) => {
+    const sql = `SELECT * FROM users WHERE email = ?`;
+
+    try {
+        // execute는 ? 자리에 email값 대체하는 메서드
+        const[rows] = await jerrydb.execute(sql,[email]);
+
+        // rows.length 값 출력 (사용자 정보가 있으면 1 이상, 없으면 0)
+        console.log('조회된 사용자 수:', rows.length);
+        
+        // 사용자 존재시 첫 번째 사용자 정보가 rows[0]에 저장, 사용자 없으면 null 값
+        return rows.length > 0 ? rows[0] : null;
+        
+
+    } catch (err) {
+        console.error('이메일 사용자 조회 중 오류 발생',err.message);
+        throw new err;
     }
 }
 
