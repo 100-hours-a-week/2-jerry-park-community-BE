@@ -2,11 +2,6 @@
 import express from 'express';
 import timeout from 'connect-timeout'; // connect-timeout 모듈
 import rateLimit from 'express-rate-limit'; // express-rate-limit 모듈
-import postRoutes from './routes/postRoutes.js'; // 게시물  route 등록
-import userRoutes from './routes/userRoutes.js'; // 회원가입 route 등록
-import commentRoutes from './routes/commentRoutes.js'; // 댓글 route
-const app = express();
-const port = 3000;
 import cors from 'cors';
 import path from 'path';   // 이미지 정적 경로
 import session from 'express-session'; // 쿠키 세션
@@ -14,6 +9,12 @@ import cookieParser from 'cookie-parser';
 import colors from 'colors'; // colors 패키지
 import moment from 'moment'; // moment 패키지
 
+import postRoutes from './routes/postRoutes.js'; // 게시물  route 등록
+import userRoutes from './routes/userRoutes.js'; // 회원가입 route 등록
+import commentRoutes from './routes/commentRoutes.js'; // 댓글 route
+
+const app = express();
+const port = 3000;
 
 // 쿠키 세션 설정
 app.use(cookieParser());

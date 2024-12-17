@@ -7,13 +7,8 @@ import bcrypt from 'bcryptjs'; // bcrypt 라이브러리 가져오기 (비밀번
 const registerUser = async (req, res) => {
     // 요청 본문에서 nickname, email, password를 추출해 변수에 할당
     const { nickname, email, password } = req.body;
-    
-    // 이미지 처리
-    let profile_imgPath = null;
-    // 이미지 업로드시 경로 저장
-    if (req.file) {
-        profile_imgPath = `/uploads/${req.file.filename}`;
-    }
+
+    const profile_imgPath = `/uploads/${req.file.filename}`;
     
     try {
         // 이메일 중복 확인
@@ -46,6 +41,33 @@ const registerUser = async (req, res) => {
         })
     }
 }
+
+// 닉네임 이메일 중복검사 미들웨어
+const checknicknameemail = async (req,res,next) => {
+    const { nickname, email } = req.body;
+    // console.log('Checkemailndsfj', req.body);
+    // console.log('유효성검사 nickname',nickname);
+    try {
+        // 이메일 중복 검사
+        const existingEmail = await usermodel.findUserByEmail(email);
+        if (existingEmail) {
+            return res.status(400).json({ message: '* 중복된 이메일입니다.' });
+        }
+
+        // 닉네임 중복 검사
+        const existingNickname = await usermodel.findUserByNickname(nickname);
+        if (existingNickname) {
+            return res.status(400).json({ message: '* 중복된 닉네임입니다.' });
+        }
+        
+        next(); // 중복 통과 후 다음 미들웨어로
+
+    } catch (err) {
+        res.status(500).json({ message: 'checknickanmeemail서버 오류 발생', error: err.message });
+        next(err);
+    }
+};
+
 
 // 로그인시
 const loginUser = async (req,res) => {
@@ -232,4 +254,5 @@ export default {
     deleteUser,
     checkNickname,
     getSessionUser,
+    checknicknameemail,
 };

@@ -25,6 +25,9 @@ const upload = multer({ storage: storage });
 // register 경로로 들어온 POST 요청 처리 클라에서 보내는 파일이름 'image'
 router.post('/register', upload.single('profile_img'), userController.registerUser);
 
+// 닉네임, 이메일 중복검사 api
+router.post('/register/check', userController.checknicknameemail);
+
 // /login 경로로 들어온 post 요청 처리 (로그인 라우트)
 router.post('/login', userController.loginUser);
 
