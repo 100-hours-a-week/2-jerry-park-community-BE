@@ -9,13 +9,15 @@ import path from 'path';
 // 쿠키/세션 인가 사용
 import { isAuthenticated } from '../middleware/authMiddleware.js';
 
-// 파일 저장 위치, 파일 이름 설정 (멀터)
+// 파일 저장 설정
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        cb(null, 'uploads/');
+        cb(null, 'uploads/');  // 파일 업로드 경로
     },
     filename: function (req, file, cb) {
-        cb(null, Date.now() + '-' + file.originalname);
+        // 파일명 공백 제거 및 하이픈 대체
+        const sanitizedFileName = file.originalname.replace(/\s+/g, '-');
+        cb(null, Date.now() + '-' + sanitizedFileName);  // 최종 파일명
     }
 });
 
