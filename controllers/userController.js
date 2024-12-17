@@ -45,8 +45,8 @@ const registerUser = async (req, res) => {
 // 닉네임 이메일 중복검사 미들웨어
 const checknicknameemail = async (req,res,next) => {
     const { nickname, email } = req.body;
-    // console.log('Checkemailndsfj', req.body);
-    // console.log('유효성검사 nickname',nickname);
+    console.log('Checkemailndsfj', req.body);
+    console.log('유효성검사 nickname',nickname);
     try {
         // 이메일 중복 검사
         const existingEmail = await usermodel.findUserByEmail(email);
@@ -59,9 +59,8 @@ const checknicknameemail = async (req,res,next) => {
         if (existingNickname) {
             return res.status(400).json({ message: '* 중복된 닉네임입니다.' });
         }
-        
-        next(); // 중복 통과 후 다음 미들웨어로
-
+        // 중복 검사 성공 시 응답
+        res.status(200).json({ message: '중복 없음' });
     } catch (err) {
         res.status(500).json({ message: 'checknickanmeemail서버 오류 발생', error: err.message });
         next(err);
