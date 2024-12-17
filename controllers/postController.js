@@ -40,17 +40,6 @@ const createPost = async (req, res) => {
     }
 }
 
-// 게시물 리스트 조회
-// async function getPosts(req, res) {
-//     try {
-//         const posts = await postModel.getPosts();
-//         res.status(200).json(posts);
-//     } catch (err) {
-//         console.error('게시글 읽는 중 오류 발생:', err.message);
-//         res.status(500).json({ message: '서버 오류 발생', error: err.message });
-//     }
-// }
-
 // 페이징 적용 게시물 리스트 조회
 const getPosts = async (req, res) => {
     // console.log('req.query:',req.query);
@@ -159,17 +148,26 @@ const deletePost = async (req,res) => {
 
 // 좋아요 증가
 const likePost = async (req,res) => {
-    const {post_id}= req.query;
+    const { post_id , liked }= req.query;
 
+    console.log('likePost 함수 컨트롤러, post_id, liked', post_id, liked);
+    // post_id 없을 시 처리
     if (!post_id){
-        return res.status(400).json({success:false, message:'post_id 없음'});
+        return res.status(400).json({success:false, message:'컨트롤러 좋아요 수 post_id 없음'});
     }
+
     try {
-        const updatedLikes = await postModel.increseLikes(post_id);
+        let updatedLikes;
+        if(liked === 'true') {
+            updatedLikes = await postModel.decreaseLikes(post_id);
+        } else {
+            updatedLikes = await postModel.increaseLikes(post_id);
+        }
+
         res.json({success:true, likes:updatedLikes});
     } catch (err) {
         console.error('좋아요 증가 중 오류 : ',err);
-        res.status(500).json({success:false, message: '서버 오류로 좋아요수 증가 실패'});
+        res.status(500).json({success:false, message: '컨트롤러 likePost()서버 오류로 좋아요수 증가 실패'});
     }
 }
 

@@ -114,7 +114,7 @@ const deletePost = async (post_id) => {
 }
 
 // 좋아요 증가
-const increseLikes = async (post_id) => {
+const increaseLikes = async (post_id) => {
     const sql = `UPDATE posts SET likes = likes+1 WHERE post_id = ? `;
     const [result] = await jerrydb.execute(sql, [post_id]);
 
@@ -124,6 +124,17 @@ const increseLikes = async (post_id) => {
     }
 
     // 업데이트 된 좋아요 수 반환
+    const [likesResult] = await jerrydb.query(`SELECT likes FROM posts WHERE post_id = ?`, [post_id]);
+    return likesResult[0].likes;
+}
+const decreaseLikes = async (post_id) => {
+    const sql = `UPDATE posts SET likes = likes-1 WHERE post_id = ?`;
+    const [result] = await jerrydb.execute(sql, [post_id]);
+
+    if (result.affectedRows === 0) {
+        throw new Error('좋아요 감소할 게시물 찾을 수 없음');
+    }
+
     const [likesResult] = await jerrydb.query(`SELECT likes FROM posts WHERE post_id = ?`, [post_id]);
     return likesResult[0].likes;
 }
@@ -148,6 +159,7 @@ export default {
     getPostById,
     updatePost,
     deletePost,
-    increseLikes,
+    increaseLikes,
     increseViews,
+    decreaseLikes,
 };
