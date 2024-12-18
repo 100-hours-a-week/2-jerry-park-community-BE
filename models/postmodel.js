@@ -39,8 +39,11 @@ const getPosts = async ({offset, limit}) => {
     // user_id 통해 users에서 nickname 가져오기
     const sql = `
         SELECT posts.*,
+            users.nickname,
+            users.profile_img,
             COUNT(comments.comment_id) AS comment_count
         FROM posts
+        JOIN users ON posts.user_id = users.user_id
         LEFT JOIN comments ON posts.post_id = comments.post_id
         GROUP BY posts.post_id
         ORDER BY posts.created_time DESC
