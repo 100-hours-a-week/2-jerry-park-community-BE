@@ -11,7 +11,19 @@ const jerrydb = mysql.createPool({
     user: process.env.DB_USER,        // .env 파일에서 가져온 값
     password: process.env.DB_PASSWORD, // .env 파일에서 가져온 값
     database: process.env.DB_NAME     // .env 파일에서 가져온 값
+    // port: process.env.DB_PORT || 3306 // RDS 포트 (기본 3306)
 });
+
+// 연결 테스트
+(async () => {
+    try {
+        const connection = await jerrydb.getConnection();
+        console.log("RDS DB 연결 성공!");
+        connection.release();
+    } catch (error) {
+        console.error("RDS DB 연결 실패:", error);
+    }
+})();
 
 // 연결 풀 외부 내보내기
 export default jerrydb;
