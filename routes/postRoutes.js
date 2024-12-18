@@ -37,7 +37,7 @@ router.get('/', postController.getPosts);
 router.get('/post', postController.getPostById);
 
 // 게시물 수정
-router.patch('/post', postController.updatePost);
+router.patch('/post',upload.single('fileInput'), postController.updatePost);
 
 // 게시물 삭제
 router.delete('/post', postController.deletePost);

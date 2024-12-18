@@ -109,21 +109,25 @@ const getPostById = async (req, res) => {
 
 // 게시글 수정
 const updatePost = async (req, res) => {
-    const post_id = req.query.post_id;
+    const { post_id } = req.query;
     const {title, content} = req.body;
+    const image = req.file ? `/uploads/${req.file.filename}` : null;
 
     if(!title || !content) {
         return res.status(400).json({success:false, message: '제목과 내용이 비어있음'});
     }
+    
     try {
-        const result = await postModel.updatePost(post_id, {title,content});
-
-        res.status(200).json({success : true, message:'게시글 수정 완료'});
-
+        const result = await postModel.updatePost(post_id, {title,content, image});
+        if (result.success) {
+            res.status(200).json({success : true, message:'게시글 수정 완료'});
+        } else {
+            res.status(400).json({success:false, message:'게시글 수정 실패 컨트롤러updatePost()'})
+        }
     } catch(err) {
         res.status(500).json({success:false, message:'게시글 수정 중 오류 발생'});
     }
-}
+};
 
 const deletePost = async (req,res) => {
     const {post_id} = req.query; // URL post_id 쿼리 가져옴

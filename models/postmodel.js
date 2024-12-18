@@ -83,14 +83,18 @@ const getPostById = async (post_id) => {
 
 
 // 게시물 수정
-async function updatePost(post_id, {title, content}) {
-    const sql = `
-        UPDATE posts
-        SET title = ?, content = ?, created_time = NOW()
-        WHERE post_id = ?
-    `;
+async function updatePost(post_id, {title, content, image}) {
+    
+    console.log('게시물수정 ',post_id, title,content,image);
+    image = image || null;
+    const sql = image
+    ? `UPDATE posts SET title = ?, content = ?,image = ?, created_time = NOW() WHERE post_id = ?`
+    : `UPDATE posts SET title = ?, content = ?, created_time = NOW() WHERE post_id = ?`;
+
+    const params = image ? [title, content, image, post_id] : [title, content, post_id];
+
     try {
-        const [result] = await jerrydb.execute(sql, [title,content,post_id]);
+        const [result] = await jerrydb.execute(sql, params);
 
         // 업데이트 된 행 개수 반환하여 성공 여부 판단
         if (result.affectedRows === 0){
@@ -101,7 +105,7 @@ async function updatePost(post_id, {title, content}) {
         console.error('게시글 수정 중 오류 발생 : ', err.message);
         throw err;
     }
-}
+};
 
 // 게시물 삭제
 const deletePost = async (post_id) => {
