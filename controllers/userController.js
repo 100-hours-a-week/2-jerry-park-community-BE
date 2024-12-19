@@ -88,7 +88,7 @@ const loginUser = async (req,res) => {
             // console.log('저장된 해시 비밀번호 길이:', user.password.length);
             // bcrypt를 사용해 비밀번호 비교, 입력된 비밀번호와 해싱된 비밀번호를 비교
             const isPasswordValid = await bcrypt.compare(password,user.password);
-            console.log('비밀번호 일치 여부 :', isPasswordValid);
+            // console.log('비밀번호 일치 여부 :', isPasswordValid);
         // 비밀번호 일치하지 않으면 로그인 실패
         if (!isPasswordValid) {
             return res.status(400).json({message:'이메일 또는 비밀번호가 일치하지 않습니다.'});
@@ -233,9 +233,9 @@ const checkNickname = async (req,res) => {
 
 // 세션 정보 내보내기
 const getSessionUser = (req, res) => {
-    console.log('getSessionUser의 req.session : ', req.session);
+    // console.log('getSessionUser의 req.session : ', req.session);
     if (req.session && req.session.user) {
-        console.log('세션 유저:', req.session.user);
+        // console.log('세션 유저:', req.session.user);
         return res.status(200).json(req.session.user); // 세션에 저장된 사용자 정보 반환
     } else {
         console.log('세션이 비어 있습니다.');

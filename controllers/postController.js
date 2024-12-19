@@ -154,7 +154,7 @@ const deletePost = async (req,res) => {
 const likePost = async (req,res) => {
     const { post_id , liked }= req.query;
 
-    console.log('likePost 함수 컨트롤러, post_id, liked', post_id, liked);
+    // console.log('likePost 함수 컨트롤러, post_id, liked', post_id, liked);
     // post_id 없을 시 처리
     if (!post_id){
         return res.status(400).json({success:false, message:'컨트롤러 좋아요 수 post_id 없음'});
