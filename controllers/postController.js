@@ -59,7 +59,7 @@ const getPosts = async (req, res) => {
         };
         // console.log('requestData : ', requestData);
         const responseData = await postModel.getPosts(requestData);
-        console.log('responseData',responseData);
+        // console.log('responseData',responseData);
         // 가져온 데이터 없을시 에러
         if (!responseData || !requestData === 0 ){
             return res.status(404).json({

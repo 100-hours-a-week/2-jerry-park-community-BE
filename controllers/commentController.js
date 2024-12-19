@@ -11,8 +11,8 @@ const getComments = async (req, res) => {
     try {
         const {comments , commentCount} = await commentmodel.getCommentsByPostId(post_id);
         res.status(200).json({comments, commentCount});
-        console.log("DB에서 가져온 댓글 데이터:", comments);  // 데이터 확인용 로그
-        console.log("댓글 수:", commentCount);  // 댓글 수 확인용 로그
+        // console.log("DB에서 가져온 댓글 데이터:", comments);  // 데이터 확인용 로그
+        // console.log("댓글 수:", commentCount);  // 댓글 수 확인용 로그
     } catch (err) {
         res.status(500).json({message: '댓글 조회 중 오류 발생', error: err.message});
     }

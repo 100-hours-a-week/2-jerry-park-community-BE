@@ -1,18 +1,28 @@
-// .env 파일에서 환경 변수 로드
-import dotenv from 'dotenv';
-dotenv.config();
-
 // 'mysql2/promise의 promise 모듈 불러옴 (비동기 작업)
 import mysql from 'mysql2/promise';
+// .env 파일에서 환경 변수 로드
+import dotenv from 'dotenv';
+
+dotenv.config();
+
+
 
 // DB 연결 풀 생성
 const jerrydb = mysql.createPool({
     host: process.env.DB_HOST,        // .env 파일에서 가져온 값
     user: process.env.DB_USER,        // .env 파일에서 가져온 값
     password: process.env.DB_PASSWORD, // .env 파일에서 가져온 값
-    database: process.env.DB_NAME     // .env 파일에서 가져온 값
-    // port: process.env.DB_PORT || 3306 // RDS 포트 (기본 3306)
+    database: process.env.DB_NAME,     // .env 파일에서 가져온 값
+    port: process.env.DB_PORT // RDS 포트 (기본 3306)
 });
+
+// const jerrydb = mysql.createPool({
+//     host: 'database-1.cngaaq202ro5.ap-northeast-2.rds.amazonaws.com',        // .env 파일에서 가져온 값
+//     user: 'admin',        // .env 파일에서 가져온 값
+//     password: 'Ykmysjgs96#', // .env 파일에서 가져온 값
+//     database: 'jerryCommunity',    // .env 파일에서 가져온 값
+//     port: '3306', // RDS 포트 (기본 3306)
+// });
 
 // 연결 테스트
 (async () => {
