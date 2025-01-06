@@ -86,7 +86,6 @@ const getPosts = async (req, res) => {
 const getPostById = async (req, res) => {
     const post_id = req.query.post_id; // 요청 url에서 id 가져옴
 
-    
     if(!post_id) {
         // post_id 없다면 => 400
         return res.status(400).json({error:'post_id가 필요'});
