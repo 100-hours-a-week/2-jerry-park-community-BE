@@ -9,13 +9,20 @@ import path from 'path';
 // 쿠키/세션 인가 사용
 import { isAuthenticated } from '../middleware/authMiddleware.js';
 
-// 파일 저장 위치, 파일 이름 설정 (멀터)
+// 파일 저장 위치, 파일 이름 설정 (멀터) 한글도 가능
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        cb(null, 'uploads/');
+        cb(null, 'uploads/'); // 파일 저장 경로
     },
     filename: function (req, file, cb) {
-        cb(null, Date.now() + '-' + file.originalname);
+        try {
+            // 한글 파일명을 그대로 사용
+            const originalName = Buffer.from(file.originalname, 'latin1').toString('utf8');
+            cb(null, `${Date.now()}-${originalName}`);
+        } catch (err) {
+            console.error('파일명 처리 중 오류:', err);
+            cb(null, `${Date.now()}-unknown-file`);
+        }
     }
 });
 

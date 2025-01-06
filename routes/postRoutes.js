@@ -9,15 +9,20 @@ import { isAuthenticated } from '../middleware/authMiddleware.js';
 // multer 모듈 import
 import multer from 'multer';
 
-// 멀터 파일 저장 설정
+// 멀터 파일 저장 설정 한글도 그대로 저장
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        cb(null, 'uploads/');  // 파일 업로드 경로
+        cb(null, 'uploads/'); // 파일 저장 경로
     },
     filename: function (req, file, cb) {
-        // 파일명 공백 제거 및 하이픈 대체
-        const sanitizedFileName = file.originalname.replace(/\s+/g, '-');
-        cb(null, Date.now() + '-' + sanitizedFileName);  // 최종 파일명
+        try {
+            // 한글 파일명을 그대로 사용
+            const originalName = Buffer.from(file.originalname, 'latin1').toString('utf8');
+            cb(null, `${Date.now()}-${originalName}`);
+        } catch (err) {
+            console.error('파일명 처리 중 오류:', err);
+            cb(null, `${Date.now()}-unknown-file`);
+        }
     }
 });
 
