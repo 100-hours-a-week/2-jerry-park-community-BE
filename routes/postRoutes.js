@@ -6,6 +6,10 @@ const router = express.Router();
 import * as postController from '../controllers/postController.js';
 // 쿠키/세션 인가 사용
 import { isAuthenticated } from '../middleware/authMiddleware.js';
+
+// 게시물 작성자 권한 확인 미들웨어
+import checkPostOwner from '../middleware/checkPostOwner.js';
+
 // multer 모듈 import
 import multer from 'multer';
 
@@ -32,8 +36,6 @@ const upload = multer({ storage: storage });
 // post에 multer 적용 (파일이 있을 경우)
 //'image'는 클라에서 보내는 파일 이름
 router.post('/', upload.single('image'), postController.createPost);
-// POST 요청 들어올 시 실행되는 라우터 정의
-// postController의 createPost 함수를 호출 (POST시)
 
 // 게시글 전체 조회 라우트 (/api/posts)
 router.get('/', postController.getPosts);
@@ -42,10 +44,10 @@ router.get('/', postController.getPosts);
 router.get('/post', postController.getPostById);
 
 // 게시물 수정
-router.patch('/post',upload.single('fileInput'), postController.updatePost);
+router.patch('/post',checkPostOwner, upload.single('fileInput'), postController.updatePost);
 
 // 게시물 삭제
-router.delete('/post', postController.deletePost);
+router.delete('/post',checkPostOwner, postController.deletePost);
 
 // 게시물 좋아요 증가
 router.put('/like',postController.likePost);

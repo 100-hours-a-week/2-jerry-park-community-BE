@@ -16,12 +16,6 @@ const jerrydb = mysql.createPool({
     port: process.env.DB_PORT // RDS 포트 (기본 3306)
 });
 
-console.log('DB_HOST:', process.env.DB_HOST);
-console.log('DB_USER:', process.env.DB_USER);
-console.log('DB_PASSWORD:', process.env.DB_PASSWORD);
-console.log('DB_NAME:', process.env.DB_NAME);
-console.log('DB_PORT:', process.env.DB_PORT);
-
 // const jerrydb = mysql.createPool({
 //     host: 'jerrycommunity.amazonaws.com',        // .env 파일에서 가져온 값
 //     user: 'admin',        // .env 파일에서 가져온 값

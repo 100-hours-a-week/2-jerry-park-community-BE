@@ -79,8 +79,6 @@ const getPostById = async (post_id) => {
         throw err;
     }
 }
-// 게시물 총 갯수
-
 
 // 게시물 수정
 async function updatePost(post_id, {title, content, image}) {
@@ -162,6 +160,18 @@ const increseViews = async (post_id) => {
     return updatedViews[0].views;
 }
 
+// 게시물 수정,삭제 시 작성자 본인인지 확인하기
+const getPostAuthorById = async (post_id) => {
+    const sql = `SELECT user_id FROM posts WHERE post_id = ?`;
+    try {
+        const [rows] = await jerrydb.execute(sql,[post_id]);
+        return rows[0];
+    } catch (err) {
+        console.error('게시글 작성자 조회 중 에러 postmodel, getPostAuthorById', err.message);
+        throw err;
+    }
+}
+
 export default {
     createPost,
     getPosts,
@@ -171,4 +181,5 @@ export default {
     increaseLikes,
     increseViews,
     decreaseLikes,
+    getPostAuthorById,
 };
