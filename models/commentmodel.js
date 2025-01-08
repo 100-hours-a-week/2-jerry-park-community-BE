@@ -68,9 +68,21 @@ const deleteComment = async (comment_id) => {
     }
 }
 
+const getCommentAuthorById = async (comment_id) => {
+    const sql = `SELECT user_id FROM comments WHERE comment_id = ?`;
+    try {
+        const [rows] = await jerrydb.execute(sql, [comment_id]);
+        return rows[0];
+    } catch (err) {
+        console.error('댓글 작성자 조회 오류 model', err.message);
+        throw err;
+    }
+};
+
 export default {
     getCommentsByPostId,
     createComment,
     updateComment,
     deleteComment,
+    getCommentAuthorById,
 };
