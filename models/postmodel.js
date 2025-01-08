@@ -45,7 +45,7 @@ const getPosts = async ({offset, limit}) => {
         FROM posts
         JOIN users ON posts.user_id = users.user_id
         LEFT JOIN comments ON posts.post_id = comments.post_id
-        GROUP BY posts.post_id
+        GROUP BY posts.post_id, users.nickname, users.profile_img
         ORDER BY posts.created_time DESC
         LIMIT ? OFFSET ?
     `;
