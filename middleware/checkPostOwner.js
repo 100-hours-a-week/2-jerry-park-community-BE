@@ -22,7 +22,7 @@ const checkPostOwner = async (req, res, next) => {
         
         // 게시물 작성자와 로그인한 사용자 다를 경우
         if (post.user_id !== user_id) {
-            return res.status(403).json({message: '게시글 수정 권한이 없습니다.'});
+            return res.status(403).json({message: '게시글 수정 및 삭제 권한이 없습니다.'});
         }
         
         // 작성자 맞으면 다음 미들웨어 이동
