@@ -8,6 +8,7 @@ import session from 'express-session'; // 쿠키 세션
 import cookieParser from 'cookie-parser';
 import colors from 'colors'; // colors 패키지
 import moment from 'moment'; // moment 패키지
+import helmet from 'helmet';
 
 import postRoutes from './routes/postRoutes.js'; // 게시물  route 등록
 import userRoutes from './routes/userRoutes.js'; // 회원가입 route 등록
@@ -15,6 +16,31 @@ import commentRoutes from './routes/commentRoutes.js'; // 댓글 route
 
 const app = express();
 const port = 3000;
+
+// 보안 헤더 설정 추가
+app.use(helmet());
+app.use(helmet.contentSecurityPolicy({
+    directives: {
+        defaultSrc: ["'self'"], // 현재 도메인에서만 리소스를 로드
+        styleSrc: ["'self'", "'unsafe-inline'"], // 스타일 출처 허용
+        imgSrc: ["'self'",'http://localhost:3000'], // 이미지 로드 허용 출처
+        scriptSrc:  ["'self'", "'unsafe-inline"], // 스크립트 로드 허용 출처
+        objectSrc: ["'none'"], // 플래시, 플러그인 허용 금지
+    },
+}));
+// cross-origin-resource-policy 설정
+app.use(helmet.crossOriginResourcePolicy({ policy: 'cross-origin' }));
+
+// HSTS 설정 : HTTPS 강제 적용
+// app.use(helmet.hsts({
+//     maxAge: 31536000, // 1년 HTTPS 강제
+//     includeSubDomains: true, // 모든 서브도메인에 적용
+// }));
+// XSS 방지
+// app.use(helmet.xssFilter());
+// 클릭재킹 방지
+// app.use(helmet.frameguard({action:'sameorigin'}));
+
 
 // 쿠키 세션 설정
 app.use(cookieParser());
@@ -32,12 +58,9 @@ app.use(session({
 app.use(cors({
     origin: 'http://localhost:5500', // 클라이언트 도메인 명시
     credentials: true, // 인증 정보를 포함하도록 설정
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'], // 허용할 HTTP 메서드
+    allowedHeaders: ['Content-Type', 'Authorization'], // 허용 헤더 명시
 })); 
-
-// app.get('/set-session', (req, res) => {
-//     req.session.key = 'value'; // 세션에 저장
-//     res.send('세션에 값 저장 완료');
-// });
 
 // __dirname을 대신하여 import.meta.url을 사용하여 디렉토리 경로 계산 (ES6)
 // decodeURIComponent는 URL에서 인코딩된 문자열을 원래의 형태로 복원하는 함수
