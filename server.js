@@ -65,8 +65,8 @@ app.use(cors({
 // __dirname을 대신하여 import.meta.url을 사용하여 디렉토리 경로 계산 (ES6)
 // decodeURIComponent는 URL에서 인코딩된 문자열을 원래의 형태로 복원하는 함수
 const __dirname = path.dirname(decodeURIComponent(new URL(import.meta.url).pathname));
-// uploads 폴더를 정적 파일로 제공하도록 설정
-app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+// uploads 폴더를 정적 파일로 제공하도록 설정 잡다한 설정 제거
+app.use('/uploads', express.static('uploads'));
 
 
 // JSON 바디 파싱 미들웨어
