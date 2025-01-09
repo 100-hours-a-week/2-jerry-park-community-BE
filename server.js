@@ -68,6 +68,11 @@ const __dirname = path.dirname(decodeURIComponent(new URL(import.meta.url).pathn
 // uploads 폴더를 정적 파일로 제공하도록 설정 잡다한 설정 제거
 app.use('/uploads', express.static('uploads'));
 
+// app.use('/uploads', (req, res, next) => {
+//     const decodedPath = decodeURIComponent(req.path); // URL 디코딩
+//     req.url = decodedPath; // 디코딩된 경로를 사용
+//     next();
+// }, express.static('uploads'));
 
 // JSON 바디 파싱 미들웨어
 app.use(express.json());
