@@ -98,7 +98,7 @@ const findUserByEmail = async (email) => {
 
     } catch (err) {
         console.error('이메일 사용자 조회 중 오류 발생',err.message);
-        throw new err;
+        throw err;
     }
 }
 
