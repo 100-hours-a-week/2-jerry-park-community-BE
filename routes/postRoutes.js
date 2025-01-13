@@ -4,8 +4,6 @@ const router = express.Router();
 
 // postController 모듈 import
 import * as postController from '../controllers/postController.js';
-// 쿠키/세션 인가 사용
-import { isAuthenticated } from '../middleware/authMiddleware.js';
 
 // 게시물 작성자 권한 확인 미들웨어
 import checkPostOwner from '../middleware/checkPostOwner.js';
