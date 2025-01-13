@@ -66,12 +66,14 @@ const updateComment = async (req,res) => {
         }
 
         res.status(200).json({
+            success:true,
             message: '댓글 수정 완료',
             comment_id: comment_id,
             content: content,
         });
     } catch (err) {
         res.status(500).json({
+            success:false,
             message: '댓글 수정 중 오류 발생',
             error: err.message,
         });
