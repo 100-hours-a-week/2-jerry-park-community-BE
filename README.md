@@ -3,7 +3,7 @@
 <!-- logo -->
 <img src="https://github.com/user-attachments/assets/cdf4a0da-03dc-41cd-bf2a-c7834330c4cc" width="100"/>
 
-### Jerry's Community - FE 🖍
+### Jerry's Community - BE 🖍
 
 [<img src="https://img.shields.io/badge/-readme.md-important?style=flat&logo=google-chrome&logoColor=white" />]() [<img src="https://img.shields.io/badge/-tech blog-blue?style=flat&logo=google-chrome&logoColor=white" />]() [<img src="https://img.shields.io/badge/release-v1.0.0-ㅎㄱㄷ두?style=flat&logo=google-chrome&logoColor=white" />]() 
 <br/> [<img src="https://img.shields.io/badge/프로젝트 기간-2024.11.01~2025.01.15-fab2ac?style=flat&logo=&logoColor=white" />]()
