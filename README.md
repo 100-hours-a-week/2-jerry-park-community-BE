@@ -11,7 +11,7 @@
 </div> 
 
 ## 📝 소개
-백엔드 깃 레파지토리의 README.md를 빠르게 작성하기 위해 만든 템플릿입니다.
+Jerry's Community의 FE 코드를 담은 레포지스트리입니다.
 
 다음과 같은 내용을 작성할 수 있습니다.
 - 프로젝트 소개
@@ -22,19 +22,47 @@
 - 기술적 이슈와 해결 과정
 - 프로젝트 팀원
 
-필요한 기술 스택에 대한 logo는 [skills 폴더](/skills/)에서 다운로드 받을 수 있습니다.
 
 <br />
 
 > 화면 구성과 프로토 타입 중 원하는 것을 사용해주세요.
 
 ### 화면 구성
-|Screen #1|Screen #2|
-|:---:|:---:|
-|<img src="https://user-images.githubusercontent.com/80824750/208456048-acbf44a8-cd71-4132-b35a-500047adbe1c.gif" width="400"/>|<img src="https://user-images.githubusercontent.com/80824750/208456234-fb5fe434-aa65-4d7a-b955-89098d5bbe0b.gif" width="400"/>|
+|로그인|
+|:---:|
+|<img width="1500" alt="image" src="https://github.com/user-attachments/assets/67ef4d77-d4c6-45d4-b781-543c40f25b46" />|
+|로그인, 회원가입 수행가능한 접속 시 페이지입니다.|
 
-### 프로토타입
-<img src="https://user-images.githubusercontent.com/80824750/208454673-0449e49c-57c6-4a6b-86cf-66c5b1e623dc.png">
+|회원가입|
+|:---:|
+|<img width="1500" alt="image" src="https://github.com/user-attachments/assets/90938bf4-b7ce-4451-ab87-4860610fa14b" />|
+|회원가입을 수행할 수 있는 페이지입니다.|
+
+|게시물 리스트|
+|:---:|
+|<img width="1500" alt="image" src="https://github.com/user-attachments/assets/233193e4-8cb7-426c-ad48-a196cf077235" />|
+|커뮤니티의 게시물을 한 눈에 볼 수 있는 페이지입니다.|
+
+|게시물 상세조회|
+|:---:|
+|<img width="1500" alt="image" src="https://github.com/user-attachments/assets/b4fda34a-50b1-49a3-b831-ff9c4c013b09" />|
+|게시물 리스트에서 클릭한 게시물을 볼 수 있고 해당 게시물의 좋아요를 누를 수 있으며,게시물 수정,삭제 및 댓글 작성,수정,삭제,게시글 조회수를 확인 할 수 있는 페이지입니다. |
+
+|게시물 수정|
+|:---:|
+|<img width="1500" alt="image" src="https://github.com/user-attachments/assets/bf048fb8-81ec-431e-82ef-6b7f44ad21f6" />|
+|게시물 수정을 할 수 있는 페이지입니다. 게시글 사진 변경도 가능합니다.|
+
+|회원정보 수정|
+|:---:|
+|<img width="1500" alt="image" src="https://github.com/user-attachments/assets/5081cfc5-7d7b-4678-9752-0e8dd5edbc88" />|
+|회원정보를 수정할 수 있는 페이지입니다. 회원탈퇴도 가능합니다.|
+
+|비밀번호 수정|
+|:---:|
+|<img width="1500" alt="image" src="https://github.com/user-attachments/assets/98494530-f96d-4e2b-87f3-8556be637a5f" />|
+|비밀번호를 수정할 수 있는 페이지입니다.|
+
 
 <br />
 
