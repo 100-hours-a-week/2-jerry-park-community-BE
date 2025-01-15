@@ -11,7 +11,7 @@
 </div> 
 
 ## 📝 소개
-Jerry's Community의 FE 코드를 담은 레포지스트리입니다.
+Jerry's Community의 BE 코드를 담은 레포지스트리입니다.
 
 다음과 같은 내용을 작성할 수 있습니다.
 - 프로젝트 소개
@@ -95,7 +95,7 @@ Jerry's Community의 FE 코드를 담은 레포지스트리입니다.
 <br />
 
 ## 🛠️ 프로젝트 아키텍쳐
-![no-image](https://user-images.githubusercontent.com/80824750/208294567-738dd273-e137-4bbf-8307-aff64258fe03.png)
+![no-image](.png)
 
 
 
