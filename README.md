@@ -76,7 +76,10 @@ Jerry's Community의 FE 코드를 담은 레포지스트리입니다.
 ### Back-end
 <div>
 <img src="https://github.com/yewon-Noh/readme-template/blob/main/skills/Mysql.png?raw=true" width="80">
-</div>
+<img src="https://github.com/user-attachments/assets/774de49d-a1f5-4902-8c8f-247506ffac52" width="80">
+
+
+![image]()
 
 ### Infra
 <div>
