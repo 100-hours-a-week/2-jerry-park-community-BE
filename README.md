@@ -1,8 +1,5 @@
 ```
 2-jerry-park-be
-├─ .DS_Store
-├─ .vscode
-│  └─ settings.json
 ├─ DBpools
 │  └─ jerryDBpool.js
 ├─ controllers
