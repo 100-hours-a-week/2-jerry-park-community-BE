@@ -69,7 +69,7 @@ Jerry's Community의 FE 코드를 담은 레포지스트리입니다.
 ## 🗂️ APIs
 작성한 API는 아래에서 확인할 수 있습니다.
 
-👉🏻 [API 바로보기](/backend/APIs.md)
+👉🏻 [API 바로보기](2-jerry-park-community-BE/APIs.md)
 
 
 <br />
