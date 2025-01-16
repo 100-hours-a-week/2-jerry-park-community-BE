@@ -11,21 +11,18 @@
 </div> 
 
 ## 📝 소개
-Jerry's Community의 FE 코드를 담은 레포지스트리입니다.
+Jerry's Community의 BE 코드를 담은 레포지스트리입니다.
 
-다음과 같은 내용을 작성할 수 있습니다.
+## 📚 목차
 - 프로젝트 소개
-- 프로젝트 화면 구성 또는 프로토 타입
+- 프로젝트 화면 구성
 - 프로젝트 API 설계
 - 사용한 기술 스택
 - 프로젝트 아키텍쳐
 - 기술적 이슈와 해결 과정
-- 프로젝트 팀원
 
 
 <br />
-
-> 화면 구성과 프로토 타입 중 원하는 것을 사용해주세요.
 
 ### 화면 구성
 |로그인|
@@ -69,23 +66,20 @@ Jerry's Community의 FE 코드를 담은 레포지스트리입니다.
 ## 🗂️ APIs
 작성한 API는 아래에서 확인할 수 있습니다.
 
-👉🏻 [API 바로보기](/backend/APIs.md)
+👉🏻 [API 바로보기](/APIs.md)
 
 
 <br />
 
 ## ⚙ 기술 스택
-> skills 폴더에 있는 아이콘을 이용할 수 있습니다.
+
 ### Back-end
 <div>
-<img src="https://github.com/yewon-Noh/readme-template/blob/main/skills/Java.png?raw=true" width="80">
-<img src="https://github.com/yewon-Noh/readme-template/blob/main/skills/SpringBoot.png?raw=true" width="80">
-<img src="https://github.com/yewon-Noh/readme-template/blob/main/skills/SpringSecurity.png?raw=true" width="80">
-<img src="https://github.com/yewon-Noh/readme-template/blob/main/skills/SpringDataJPA.png?raw=true" width="80">
 <img src="https://github.com/yewon-Noh/readme-template/blob/main/skills/Mysql.png?raw=true" width="80">
-<img src="https://github.com/yewon-Noh/readme-template/blob/main/skills/Ajax.png?raw=true" width="80">
-<img src="https://github.com/yewon-Noh/readme-template/blob/main/skills/Thymeleaf.png?raw=true" width="80">
-</div>
+<img src="https://github.com/user-attachments/assets/774de49d-a1f5-4902-8c8f-247506ffac52" width="80">
+<img src="https://github.com/user-attachments/assets/e9d14ef6-ed2a-4674-9d05-a32d45246451" width="80">
+<img src="https://github.com/user-attachments/assets/98826fd6-f14e-4453-b63a-3b187da3957c" width="80">
+
 
 ### Infra
 <div>
@@ -101,7 +95,7 @@ Jerry's Community의 FE 코드를 담은 레포지스트리입니다.
 <br />
 
 ## 🛠️ 프로젝트 아키텍쳐
-![no-image](https://user-images.githubusercontent.com/80824750/208294567-738dd273-e137-4bbf-8307-aff64258fe03.png)
+![no-image](.png)
 
 
 
@@ -119,12 +113,7 @@ Jerry's Community의 FE 코드를 담은 레포지스트리입니다.
 
 <br />
 
-## 💁‍♂️ 프로젝트 팀원
-|Backend|Frontend|
-|:---:|:---:|
-| ![](https://github.com/yewon-Noh.png?size=120) | ![](https://github.com/SeongHo-C.png?size=120) |
-|[노예원](https://github.com/yewon-Noh)|[이성호](https://github.com/SeongHo-C)|
-
+## FE 프로젝트 구조
 ```
 2-jerry-park-be
 ├─ DBpools
