@@ -1,4 +1,6 @@
 .env
+.env.ec2
+.env.local
 .git
 node_modules/
 README.md
