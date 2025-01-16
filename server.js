@@ -29,7 +29,7 @@ app.use(helmet.contentSecurityPolicy({
     },
 }));
 // cross-origin-resource-policy 설정
-app.use(helmet.crossOriginResourcePolicy({ policy: 'same-site' }));
+app.use(helmet.crossOriginResourcePolicy({ policy: 'cross-origin' }));
 
 // HSTS 설정 : HTTPS 강제 적용
 // app.use(helmet.hsts({
