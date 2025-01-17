@@ -29,7 +29,7 @@ terminate_port() {
 }
 
 # FE 서버 관리
-FE_DIR=../../jerryFE/2-jerry-park-community-FE
+FE_DIR=../../jerryFE/2-jerry-park-fe
 if [[ -d "$FE_DIR" ]]; then
   terminate_port $FE_PORT
   cd "$FE_DIR"
@@ -41,7 +41,7 @@ else
 fi
 
 # BE 서버 관리
-BE_DIR=../../jerryBE/2-jerry-park-community-BE
+BE_DIR=../../jerryBE/2-jerry-park-be
 if [[ -d "$BE_DIR" ]]; then
   terminate_port $BE_PORT
   nohup node server.js > ../be.log 2>&1 &
