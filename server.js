@@ -22,9 +22,9 @@ app.use(helmet());
 app.use(helmet.contentSecurityPolicy({
     directives: {
         defaultSrc: ["'self'"], // 현재 도메인에서만 리소스를 로드
-        styleSrc: ["'self'", "'unsafe-inline'"], // 스타일 출처 허용
-        imgSrc: ["'self'",'http://localhost:3000'], // 이미지 로드 허용 출처
-        scriptSrc:  ["'self'", "'unsafe-inline"], // 스크립트 로드 허용 출처
+        styleSrc: ["'self'"], // 스타일 출처 허용
+        imgSrc: ["'self'"], // 이미지 로드 허용 출처
+        scriptSrc:  ["'self'"], // 스크립트 로드 허용 출처
         objectSrc: ["'none'"], // 플래시, 플러그인 허용 금지
     },
 }));
