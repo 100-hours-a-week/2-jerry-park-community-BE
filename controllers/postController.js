@@ -3,6 +3,7 @@
 // 모델 가져오기 !
 import { request } from 'express';
 import  postModel  from '../models/postmodel.js'; // import로 변경
+import xss from 'xss';
 
 // 게시물 작성
 const createPost = async (req, res) => {
@@ -21,9 +22,17 @@ const createPost = async (req, res) => {
         imagePath = `/uploads/${req.file.filename}`; // 이미지 경로
     }
     
+    // xss 방지 처리
+    const xsstitle = xss(title);
+    const xsscontent = xss(content);
+
+    console.log('xsst',xsstitle,'xssc',xsscontent);
     try {
         // createPost 함수 호출, db에 게시글 저장, 게시글 id 반환
-        const newPostId = await postModel.createPost({title, content, user_id, image: imagePath});
+        const newPostId = await postModel.createPost({
+            title : xsstitle, 
+            content : xsscontent,
+            user_id, image: imagePath});
 
         // DB 삽입 성공여부 (201 성공)
         res.status(201).json({
