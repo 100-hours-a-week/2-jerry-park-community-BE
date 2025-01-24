@@ -3,20 +3,11 @@ import jerrydb  from '../DBpools/jerryDBpool.js';
 
 // 게시글 새로 작성
 const createPost = async ({title, content, user_id, image}) => {
-
-    // // title, content, user_id가 undefined라면 null로 처리
-    // if (title === undefined) title = null;
-    // if (content === undefined) content = null;
-    // if (user_id === undefined) user_id = null;
-
-    
     // 쿼리는 posts 테이블에 삽입
     const sql = `
         INSERT INTO posts (title, content, user_id, likes, views, created_time, image)
         VALUES (?,?,?,0,0,NOW(),?)
     `;
-    // !!!!!!!!!!!!!!!!!!!! likes, views 구현 필요....
-
     try {
         // DB에 쿼리 실행
         const [result] = await jerrydb.execute(sql, [title,content,user_id,image]);

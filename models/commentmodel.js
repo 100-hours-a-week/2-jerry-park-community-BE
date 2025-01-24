@@ -27,7 +27,7 @@ const getCommentsByPostId = async (post_id) => {
     }
 }
 
-const createComment = async (post_id, content, user_id) => {
+const createComment = async ({post_id, content, user_id}) => {
     const sql = `
         INSERT INTO comments (post_id, content, user_id)
         VALUES(?,?,?);
@@ -41,7 +41,7 @@ const createComment = async (post_id, content, user_id) => {
     }
 }
 
-const updateComment = async (comment_id, content) => {
+const updateComment = async ({comment_id, content}) => {
     // 댓글 ID, 새로운 내용 기준으로 DB 쿼리문작성
     const sql = `
         UPDATE comments

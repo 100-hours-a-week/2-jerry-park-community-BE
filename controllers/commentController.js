@@ -1,4 +1,5 @@
 import commentmodel from '../models/commentmodel.js';
+import xss from 'xss';
 
 // 댓글 가져오는 getComments 함수
 const getComments = async (req, res) => {
@@ -18,16 +19,24 @@ const getComments = async (req, res) => {
     }
 }
 
-
-const createComment = async(req,res) => {
+// 댓글 작성
+const createComment = async (req,res) => {
     const {post_id, content, user_id} = req.body;
 
     // 요청 데이터 검증
     if (!post_id || !content || !user_id){
         return res.status(400).json({message : 'post_id, content, user_id는 필수값'});
     }
+
+    const xsscontent = xss(content);
+
+    console.log (post_id, xsscontent, user_id);
+
     try {
-        const result = await commentmodel.createComment(post_id,content,user_id);
+        const result = await commentmodel.createComment({post_id,
+            content : xsscontent,
+            user_id});
+
 
         // 댓글 생성 성공시, 새로 생성된 댓글 정보 반환
         res.status(201).json({
@@ -49,6 +58,7 @@ const updateComment = async (req,res) => {
     const {comment_id} = req.params; // comment_id 가져오기
     const {content} = req.body; // 댓글 내용 가져오기
 
+    const xsscontent = xss(content);
     console.log(req.params);
     console.log(req.body);
     // 요청 데이터 검증 (유효성 검사)
@@ -59,7 +69,8 @@ const updateComment = async (req,res) => {
     }
 
     try {
-        const result = await commentmodel.updateComment(comment_id, content);
+        const result = await commentmodel.updateComment({comment_id, 
+            content : xsscontent});
 
         if (result.affectedRows === 0) {
             return res.status(404).json({message : '해당 댓글을 찾을 수 없습니다'});
@@ -74,7 +85,7 @@ const updateComment = async (req,res) => {
     } catch (err) {
         res.status(500).json({
             success:false,
-            message: '댓글 수정 중 오류 발생',
+            message: '댓글 수정 중 오류 발생 컨트롤러',
             error: err.message,
         });
     }
