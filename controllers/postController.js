@@ -125,8 +125,14 @@ const updatePost = async (req, res) => {
         return res.status(400).json({success:false, message: '제목과 내용이 비어있음'});
     }
     
+    const xsstitle = xss(title);
+    const xsscontent = xss(content);
+
     try {
-        const result = await postModel.updatePost(post_id, {title,content, image});
+        const result = await postModel.updatePost(post_id, {
+            title : xsstitle,
+            content : xsscontent, image});
+            
         if (result.success) {
             res.status(200).json({success : true, message:'게시글 수정 완료'});
         } else {
