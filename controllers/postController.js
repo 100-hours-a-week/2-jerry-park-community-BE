@@ -8,13 +8,17 @@ import xss from 'xss';
 // 게시물 작성
 const createPost = async (req, res) => {
     // req.body는 클라가 보낸 데이터 본문 가져오는 객체
-    const {title, content, user_id} = req.body;
+    const {title, content} = req.body;
     
-    console.log('게시글 작성 클라로부터 받은 데이터 : ', req.body);
+    console.log('게시글 작성 reqbody : ', req.body);
 
-    if (!title || !content || !user_id) {
-        return res.status(400).json({message : '제목, 내용, 사용자 id(로그인)은 필수입니다.'});
+    if (!req.session.user || !req.session.user.user_id) {
+        return res.status(400).json({message : '로그인은 필수입니다.'});
     }
+    // 세션에서 user_id 가져오기
+    const user_id = req.session.user.user_id;
+
+    
 
     // 이미지 파일 확인
     let imagePath = null;
