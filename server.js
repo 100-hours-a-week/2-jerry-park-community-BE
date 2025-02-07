@@ -31,13 +31,8 @@ app.use(helmet.contentSecurityPolicy({
 // cross-origin-resource-policy 설정
 app.use(helmet.crossOriginResourcePolicy({ policy: 'cross-origin' }));
 
-// HSTS 설정 : HTTPS 강제 적용
-// app.use(helmet.hsts({
-//     maxAge: 31536000, // 1년 HTTPS 강제
-//     includeSubDomains: true, // 모든 서브도메인에 적용
-// }));
 // XSS 방지
-// app.use(helmet.xssFilter());
+app.use(helmet.xssFilter());
 // 클릭재킹 방지
 // app.use(helmet.frameguard({action:'sameorigin'}));
 
