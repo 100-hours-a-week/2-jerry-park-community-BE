@@ -11,7 +11,7 @@
 </div> 
 
 ## 📝 소개
-Jerry's Community의 BE 코드를 담은 레포지스트리입니다.
+Jerry's Community의 BE 코드를 담은 레포지토리입니다.
 
 ## 📚 목차
 - 프로젝트 소개
